@@ -136,7 +136,7 @@ export const summarizeText = async (text) => {
   }
 };
 
-export const promptForAction = async (text, detectedLang) => {
-  // Show UI prompt for user to choose action
-  // Return 'summarize' or 'translate'
-};
+// export const promptForAction = async (text, detectedLang) => {
+// Show UI prompt for user to choose action
+// Return 'summarize' or 'translate'
+// };

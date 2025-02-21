@@ -1,5 +1,4 @@
 import { ThemeProvider } from "@/components/common/ThemeProvider";
-import { SidebarProvider } from "@/components/ui/sidebar";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Container from "@/components/common/Container";
