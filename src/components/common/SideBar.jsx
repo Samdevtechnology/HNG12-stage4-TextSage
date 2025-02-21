@@ -1,6 +1,3 @@
-// components/Sidebar.jsx
-"use client";
-
 import {
   Sidebar,
   SidebarContent,
@@ -8,12 +5,13 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { useStore } from "@/store/chat";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 
-export default function SideBar() {
+const SideBar = () => {
   const {
     getGroupedChats,
     createChat,
@@ -23,19 +21,23 @@ export default function SideBar() {
     chats,
   } = useStore();
 
+  const { toggleSidebar } = useSidebar();
   const hasEmptyChat = chats.some((chat) => chat.messages.length === 0);
   const groupedChats = getGroupedChats();
 
   const handleNewChat = () => {
-    // Check if there's already an empty chat
     if (hasEmptyChat) {
-      // If an empty chat exists, set it as the current chat
       const emptyChat = chats.find((chat) => chat.messages.length === 0);
       setCurrentChat(emptyChat.id);
     } else {
-      // Otherwise, create a new chat
+      toggleSidebar();
       createChat("New Chat");
     }
+  };
+
+  const handleClick = (chatId) => {
+    setCurrentChat(chatId);
+    toggleSidebar();
   };
 
   return (
@@ -74,7 +76,7 @@ export default function SideBar() {
                           className={`flex items-center justify-between p-2 rounded-lg hover:bg-accent cursor-pointer ${
                             currentChatId === chat.id ? "bg-accent" : ""
                           }`}
-                          onClick={() => setCurrentChat(chat.id)}
+                          onClick={() => handleClick(chat.id)}
                         >
                           <span className="truncate text-sm">{chat.title}</span>
                           <button
@@ -97,4 +99,6 @@ export default function SideBar() {
       </SidebarContent>
     </Sidebar>
   );
-}
+};
+
+export default SideBar;

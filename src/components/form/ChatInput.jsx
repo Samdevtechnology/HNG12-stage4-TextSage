@@ -1,6 +1,5 @@
 "use client";
 
-// ChatInput.jsx
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,7 +21,7 @@ import {
 import { ArrowRightLeft, ArrowUpFromDot, Globe, Languages } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 
-export default function ChatInput() {
+const ChatInput = () => {
   const [text, setText] = useState("");
   const [shouldSummarize, setShouldSummarize] = useState(false);
   const [targetLanguage, setTargetLanguage] = useState("");
@@ -145,10 +144,12 @@ export default function ChatInput() {
         targetLanguage,
       });
     } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
       removeMessage(loadingMessageId);
       addMessage({
         type: "error",
-        text: "Failed to process your request. Please try again.",
+        text: errorMessage,
       });
     } finally {
       setIsProcessing(false);
@@ -252,4 +253,6 @@ export default function ChatInput() {
       </form>
     </div>
   );
-}
+};
+
+export default ChatInput;

@@ -28,32 +28,25 @@ export const detectLanguage = async (text) => {
     const canDetect = languageModel.available;
     if (canDetect === "no") {
       // The language detector isn't usable.
-      console.log("add text that detector is unavailable");
-      return;
+      throw new Error(
+        `Your browser supports the Experimental Language Detector API, but for some reason it can't be used at the moment (i.e insufficient disk space).`
+      );
     }
     let detector;
     if (canDetect === "readily") {
       detector = await self.ai.languageDetector.create();
     } else {
-      console.log(
-        "add model need to be downloaded and file size maybe too large"
+      throw new Error(
+        `Your browser supports the Experimental Language Detector API, but it needs to download the model first. Download size might be too large so i won't attempt to help download it.`
       );
-      detector = await self.ai.languageDetector.create({
-        monitor(m) {
-          m.addEventListener("downloadprogress", (e) => {
-            console.log(`Downloaded ${e.loaded} of ${e.total} bytes.`);
-          });
-        },
-      });
-      await detector.ready;
     }
-
     const result = await detector.detect(text);
     const { detectedLanguage, confidence } = result[0];
     return { detectedLanguage, confidence };
   } else {
-    console.log("add text that detector is unavailable");
-    console.log("Language Detector API is not available.");
+    throw new Error(
+      `Your browser does not support the Experimental Language Detector API. You won't be able to see our sage at work😔.`
+    );
   }
 };
 
@@ -68,32 +61,31 @@ export const translateText = async (text, srcLang, targetLang) => {
     );
     if (canDetect === "no") {
       // The translator translate isn't usable.
-      console.log("add text that translate is unavailable");
-      return;
+      throw new Error(
+        `Your browser supports the Experimental Translator API, but for some reason it can't be used at the moment (i.e insufficient disk space).`
+      );
     }
 
-    const translator =
-      canDetect === "readily"
-        ? await self.ai.translator.create({
-            sourceLanguage: srcLang,
-            targetLanguage: targetLang,
-          })
-        : await self.ai.translator.create({
-            sourceLanguage: srcLang,
-            targetLanguage: targetLang,
-            monitor(m) {
-              m.addEventListener("downloadprogress", (e) => {
-                console.log(`Downloaded ${e.loaded} of ${e.total} bytes.`);
-              });
-            },
-          });
+    let translator;
+
+    if (canDetect === "readily") {
+      translator = await self.ai.translator.create({
+        sourceLanguage: srcLang,
+        targetLanguage: targetLang,
+      });
+    } else {
+      throw new Error(
+        `Your browser supports the Experimental Translator API, but it needs to download the model first. Download size might be too large so i won't attempt to help download it.`
+      );
+    }
 
     const result = await translator.translate(text);
 
     return result;
   } else {
-    console.log("add text that translate is unavailable");
-    console.log("Translator API is not available.");
+    throw new Error(
+      `Your browser does not support the Experimental Translator API. You won't be able to see our sage at work😔.`
+    );
   }
 };
 
@@ -105,25 +97,20 @@ export const summarizeText = async (text) => {
     const canDetect = summarizerModel.available;
 
     if (canDetect === "no") {
-      // The language summarizer isn't usable.
-      console.log("add text that summarizer is unavailable");
-      return;
+      // The summarizer isn't usable.
+      throw new Error(
+        `Your browser supports the Experimental Summarizer API, but for some reason it can't be used at the moment (i.e insufficient disk space).`
+      );
     }
-    const summarizer =
-      canDetect === "readily"
-        ? await self.ai.summarizer.create(options)
-        : console.log("download madly heavy");
-    // : (
-    //   const summarizer = await self.ai.create(options);
-    //     summarizer.create({
-    //       monitor(m) {
-    //         m.addEventListener("downloadprogress", (e) => {
-    //           console.log(`Downloaded ${e.loaded} of ${e.total} bytes.`);
-    //         });
-    //       },
-    //     });
-    // await summarizer.ready;
-    //   )
+    let summarizer;
+
+    if (canDetect === "readily") {
+      summarizer = await self.ai.summarizer.create(options);
+    } else {
+      throw new Error(
+        `Your browser supports the Experimental Summarizer API, but it needs to download the model first. Download size might be too large so i won't attempt to help download it.`
+      );
+    }
 
     const result = await summarizer.summarize(text, {
       context: "This article is intended for a tech-savvy audience.",
@@ -131,12 +118,8 @@ export const summarizeText = async (text) => {
 
     return result;
   } else {
-    console.log("add text that summarize is unavailable");
-    console.log("Summarizer API is not available.");
+    throw new Error(
+      `Your browser does not support the Experimental Summarizer API. You won't be able to see our sage at work😔.`
+    );
   }
 };
-
-// export const promptForAction = async (text, detectedLang) => {
-// Show UI prompt for user to choose action
-// Return 'summarize' or 'translate'
-// };

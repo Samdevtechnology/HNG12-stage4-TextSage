@@ -1,5 +1,4 @@
 "use client";
-// MessageItem.jsx
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/store/chat";
@@ -12,17 +11,17 @@ import {
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Loader2 } from "lucide-react";
+import { ArrowRightLeft, Languages, Loader2 } from "lucide-react";
 
-export default function MessageItem({ message }) {
+const Message = ({ message }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [targetLanguage, setTargetLanguage] = useState("");
   const { addMessage, removeMessage } = useStore();
-  //   const addMessage = useStore((state) => state.addMessage);
 
   const handleAction = async (action, options = {}) => {
     setIsProcessing(true);
@@ -53,10 +52,12 @@ export default function MessageItem({ message }) {
         sourceLanguage: message.sourceLanguage,
       });
     } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
       removeMessage(loadingMessageId);
       addMessage({
         type: "error",
-        text: "Failed to process your request. Please try again.",
+        text: errorMessage,
       });
     } finally {
       setIsProcessing(false);
@@ -104,45 +105,39 @@ export default function MessageItem({ message }) {
               </div>
             )}
           </div>
-          <div className="mt-4 space-x-3">
-            {message.actions.canBeSummarized && (
-              <Button
-                onClick={() => handleAction("summarize")}
-                variant="outline"
-                className="w-full"
-                disabled={isProcessing}
-              >
-                {isProcessing ? (
-                  <span className="flex items-center gap-2">
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Generating Summary...
-                  </span>
-                ) : (
-                  "Get Summary"
-                )}
-              </Button>
-            )}
-
+          <div className="mt-4 flex flex-col sm:flex-row gap-3 justify-between">
             {message.actions.canBeTranslated && langIsAvailable && (
               <div className="space-y-2">
-                <Select
-                  value={targetLanguage}
-                  onValueChange={setTargetLanguage}
-                  disabled={isProcessing}
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select target language" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Object.entries(AVAILABLE_LANGUAGES)
-                      .filter(([code]) => code !== message.sourceLanguage)
-                      .map(([code, name]) => (
-                        <SelectItem key={code} value={code}>
-                          {name}
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
+                <div className="flex justify-center gap-2 items-center">
+                  <div className="flex justify-center gap-2 items-center">
+                    <div className="text-sm flex justify-center items-center">
+                      <Languages className="w-4 h-4" />
+                      {`${AVAILABLE_LANGUAGES[message.sourceLanguage]}`}
+                    </div>
+
+                    <ArrowRightLeft className="h-4 w-4" />
+                  </div>
+                  <Select
+                    value={targetLanguage}
+                    onValueChange={setTargetLanguage}
+                    disabled={isProcessing}
+                  >
+                    <SelectTrigger className="border-0 hover:bg-slate-500 h-7 shadow-none p-1 w-[100px]">
+                      <SelectValue placeholder="Translate to" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        {Object.entries(AVAILABLE_LANGUAGES)
+                          .filter(([code]) => code !== message.sourceLanguage)
+                          .map(([code, name]) => (
+                            <SelectItem key={code} value={code}>
+                              {name}
+                            </SelectItem>
+                          ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
 
                 <Button
                   onClick={() =>
@@ -154,16 +149,20 @@ export default function MessageItem({ message }) {
                   className="w-full"
                   disabled={!targetLanguage || isProcessing}
                 >
-                  {isProcessing ? (
-                    <span className="flex items-center gap-2">
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      Translating...
-                    </span>
-                  ) : (
-                    "Translate"
-                  )}
+                  Translate
                 </Button>
               </div>
+            )}
+
+            {message.actions.canBeSummarized && (
+              <Button
+                onClick={() => handleAction("summarize")}
+                variant="outline"
+                className=""
+                disabled={isProcessing}
+              >
+                Get Summary
+              </Button>
             )}
           </div>
         </div>
@@ -207,4 +206,6 @@ export default function MessageItem({ message }) {
     default:
       return null;
   }
-}
+};
+
+export default Message;

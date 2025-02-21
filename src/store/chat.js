@@ -1,4 +1,3 @@
-// store.js
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -30,11 +29,28 @@ export const useStore = create(
           type: "user",
           ...messageData,
         };
+
+        const currentChat = state.chats.find(
+          (chat) => chat.id === state.currentChatId
+        );
+        if (currentChat && currentChat.messages.length === 0) {
+          const newTitle = messageData.text.slice(0, 25);
+          state.updateChatTitle(state.currentChatId, newTitle);
+        }
+
         set((state) => ({
           chats: state.chats.map((chat) =>
             chat.id === state.currentChatId
               ? { ...chat, messages: [...chat.messages, message] }
               : chat
+          ),
+        }));
+      },
+
+      updateChatTitle: (chatId, newTitle) => {
+        set((state) => ({
+          chats: state.chats.map((chat) =>
+            chat.id === chatId ? { ...chat, title: newTitle } : chat
           ),
         }));
       },
