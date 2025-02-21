@@ -30,9 +30,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          {/* <SidebarProvider> */}
           <Container>{children}</Container>
-          {/* </SidebarProvider> */}
         </ThemeProvider>
       </body>
     </html>
