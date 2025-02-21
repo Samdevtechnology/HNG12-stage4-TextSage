@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { ArrowRightLeft, Languages, Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const Message = ({ message }) => {
   const [isProcessing, setIsProcessing] = useState(false);
@@ -172,8 +173,19 @@ const Message = ({ message }) => {
       return (
         <div className="bg-green-50 dark:bg-[#619B8A] p-4 space-y-4 max-w-[70%] rounded-lg shadow">
           {message.summary && (
-            <div>
-              <div className="text-sm text-gray-500 mb-1">Summary:</div>
+            <div
+              className={`${
+                !!message.summaryError && "text-red-600 dark:text-red-700"
+              }`}
+            >
+              <div
+                className={cn(
+                  `text-sm text-gray-500 dark:text-black/70 mb-1`,
+                  message.summaryError && "text-red-700 dark:text-red-800"
+                )}
+              >
+                Summary:
+              </div>
               {message.summary}
             </div>
           )}

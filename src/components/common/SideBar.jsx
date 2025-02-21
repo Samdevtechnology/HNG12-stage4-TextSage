@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/sidebar";
 import { useStore } from "@/store/chat";
 import { Button } from "@/components/ui/button";
-import { Trash2 } from "lucide-react";
+import { MessageSquareShare, Trash2 } from "lucide-react";
 
 const SideBar = () => {
   const {
@@ -45,13 +45,14 @@ const SideBar = () => {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <div className="mb-4">
+            <div className="mt-8 sm:mt-0 mb-4">
               <Button
                 disabled={hasEmptyChat}
                 onClick={handleNewChat}
                 className="w-full"
                 variant="outline"
               >
+                <MessageSquareShare />
                 New Chat
               </Button>
             </div>

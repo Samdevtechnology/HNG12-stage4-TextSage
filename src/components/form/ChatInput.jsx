@@ -73,6 +73,8 @@ const ChatInput = () => {
     }
     // For other language combinations, just translate
     else if (targetLanguage) {
+      result.summary = `Sorry! We currently only support summarizing in english language only.`;
+      result.summaryError = true;
       result.translatedText = await translateText(
         text,
         sourceLanguage,

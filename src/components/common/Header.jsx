@@ -3,7 +3,7 @@ import { useSidebar } from "@/components/ui/sidebar";
 import ThemeToggle from "./ThemeToggle";
 import { useStore } from "@/store/chat";
 import { Button } from "../ui/button";
-import { PanelRightOpen } from "lucide-react";
+import { MessageSquareShare, PanelRightOpen } from "lucide-react";
 
 const Header = () => {
   const { toggleSidebar } = useSidebar();
@@ -40,7 +40,7 @@ const Header = () => {
         </div>
       </div>
       {!hasEmptyChat && (
-        <div>
+        <div className="hidden sm:block">
           <Button
             disabled={hasEmptyChat}
             onClick={handleNewChat}
@@ -48,6 +48,7 @@ const Header = () => {
             variant="outline"
           >
             New Chat
+            <MessageSquareShare />
           </Button>
         </div>
       )}
