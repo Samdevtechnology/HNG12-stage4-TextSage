@@ -16,17 +16,10 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import {
-  ArrowRightLeft,
-  ArrowUpFromDot,
-  Globe,
-  Languages,
-  Loader2,
-} from "lucide-react";
+import { ArrowRightLeft, ArrowUpFromDot, Globe, Languages } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 
 export default function ChatInput() {

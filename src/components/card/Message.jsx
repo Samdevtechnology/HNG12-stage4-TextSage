@@ -81,7 +81,7 @@ export default function MessageItem({ message }) {
           <div className="space-y-2 mt-2">
             {message.actions.canBeSummarized && (
               <div>
-                - This is quite a long text I can help summarize it for you
+                - This is quite a long text, I can help summarize it for you
               </div>
             )}
             {message.actions.canBeTranslated && !langIsAvailable && (
@@ -100,7 +100,7 @@ export default function MessageItem({ message }) {
                 {`This text appears to be in  ${
                   AVAILABLE_LANGUAGES[message.sourceLanguage]
                 } (${(message.confidence * 100).toFixed(1)}% sure).
-                Would you like me help translate`}
+                Would you like me to help translate`}
               </div>
             )}
           </div>

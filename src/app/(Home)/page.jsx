@@ -6,13 +6,27 @@ import ChatInput from "@/components/form/Input";
 import Sidebar from "@/components/History";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { useStore } from "@/store/chat";
+import { useEffect, useState } from "react";
 
 const HomePage = () => {
   const currentChat = useStore((state) => state.getCurrentChat());
   const hasMessages = !currentChat || currentChat.messages.length > 0;
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="flex justify-center items-center w-full h-screen">
+        <h1>Loading....</h1>
+      </div>
+    );
+  }
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <Sidebar />
       <SidebarInset className="bg-[url('/assets/noise.png')] flex flex-col h-full min-h-screen">
         <Header />
