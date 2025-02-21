@@ -1,36 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TextSage 🤖 ~ HNG Frontend Stage 4 Task
 
-## Getting Started
+TextSage is an AI-powered chat application that provides real-time message translation, text summarization, and intelligent conversation management. It is Built on the chrome in-built AI (uses Gemini nano) which is still in an experimental face so it only works on some selected browser.
 
-First, run the development server:
+## 📑 Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [Author](#author)
+- [Acknowledgment](#acknowledgment)
+
+A modern web application built with Next.js for booking event tickets. The system provides a seamless booking experience with a multi-step form process and ticket management capabilities.
+
+## <span id="features"> ✨ Core Functionality </span>
+
+- **Chat Management:** Create, delete, and switch between chats with a persistent store using Zustand.
+- **AI-Powered Actions:**
+  - **Summarization:** Generate summaries for long messages using the Summarizer API.
+  - **Translation:** Translate messages with support for multiple languages via the Translator API.
+  - **Language Detection:** Identify the source language of a message and provide notifications if the language is not supported.
+- **Responsive UI:** Fully responsive design with a mobile-friendly layout.
+- **Theme Toggle:** Dark and light mode.
+- **Sidebar Navigation:** Organized view of chats grouped by creation date (today, yesterday, previous).
+
+## <span id="tech-stack">🛠️ Tech Stack</span>
+
+- **Framework**: Next.js 14 with App Router
+- **UI Library**: Shadcn UI
+- **State Management**: Zustand
+- **next-themes** – Theme toggling for dark/light mode.
+- **lucide-react** – Icon library for React.
+- **Styling**: Tailwind CSS
+
+## <span id="getting-started"> 🚀 Getting Started </span>
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- Package manager: **npm** or **yarn**
+- [Chrome In-built AI](https://developer.chrome.com/docs/ai)
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd [project-directory]
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+4. Set up Environment Variables
+   - Create a .env.local file and this variables:
+
+```bash
+NEXT_PUBLIC_Summarization_API_Token=your_summarization_api_token_here
+NEXT_PUBLIC_Translator_API_Token=your_translator_api_token_here
+NEXT_PUBLIC_Language_Detector_API_Token=your_language_detector_api_token_here
+```
+
+Replace the placeholder values with your actual API tokens.
+
+5. Run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## <span id="project-structure">📂 Project Structure</span>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```plaintext
+ticket-booking-app/
+├── public/
+|   |
+│   └── favicon.ico          # Favicon
+|
+├── src/
+|   └── app/                 # Next.js app router
+│        ├── page.jsx        # Homepage
+│        ├── favicon.ico     # Favicon
+│        ├── (home)/         # Homepage Logic with available tickets
+│        │   └── page.jsx
+|
+│
+├── components/
+│   ├── common/              # Reusable components (e.g., Container.jsx,)
+│   ├── forms/               # Forms
+|   |   └── ChatInput/
+│   └── ui/                  # Shadcn components
+|
+├── store/
+│   └── chat.js      # User's bookings store
+│
+|
+├── next.config.js           # Next.js configuration
+├── tailwind.config.js       # TailwindCSS configuration
+├── tsconfig.json            # TypeScript configuration
+├── README.md                # Readme file
+├── .env.local               # Environment variables (not committed)
+└── package.json             # Project dependencies and scripts
+```
 
-## Learn More
+## <span id="contributing"> 🤝 Contributing </span>
 
-To learn more about Next.js, take a look at the following resources:
+1. Fork the repository
+2. Create a feature branch
+3. Commit changes
+4. Push to the branch
+5. Create a Pull Request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## <span id="author"> 👤 Author </span>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Tosin Samuel**
+- Email: samdevtechnology@gmail.com
+- Twitter: [@samdevtech](https://x.com/samdevtech)
+- Instagram: [@samdevtech](https://www.instagram.com/samdevtech)
+- LinkedIn: [@samdevtech](https://www.linkedin.com/in/sam-dev-bb1654267)
 
-## Deploy on Vercel
+## <span id="acknowledgment"> 🙏 Acknowledgment </span>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- HNG Internship
