@@ -41,7 +41,7 @@ const SideBar = () => {
   };
 
   return (
-    <Sidebar className="w-64 h-screen bg-background p-4 bg-[url('/assets/noise.png')] border-r overflow-auto">
+    <Sidebar className="w-64 h-screen bg-[#eadac5] dark:bg-[#212327] p-4 bg-[url('/assets/noise.png')] border-r overflow-auto">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

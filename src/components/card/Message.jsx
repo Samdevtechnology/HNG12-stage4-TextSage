@@ -70,14 +70,14 @@ const Message = ({ message }) => {
   switch (message.type) {
     case "user":
       return (
-        <div className="bg-white p-4 rounded-lg max-w-[70%] self-end shadow">
+        <div className="bg-white dark:bg-[#393838] p-4 rounded-lg max-w-[70%] self-end shadow">
           {message.text}
         </div>
       );
 
     case "prompt":
       return (
-        <div className="bg-blue-50 p-4 rounded-lg max-w-[70%] shadow">
+        <div className="bg-blue-50 dark:bg-[#7899D4] p-4 rounded-lg max-w-[70%] shadow">
           <p>I noticed that:</p>
           <div className="space-y-2 mt-2">
             {message.actions.canBeSummarized && (
@@ -86,7 +86,7 @@ const Message = ({ message }) => {
               </div>
             )}
             {message.actions.canBeTranslated && !langIsAvailable && (
-              <div className="text-red-600">
+              <div className="text-red-600 dark:text-red-700">
                 -{" "}
                 {`This text appears to be in ${languageTagToHumanReadable(
                   message.sourceLanguage
@@ -105,7 +105,7 @@ const Message = ({ message }) => {
               </div>
             )}
           </div>
-          <div className="mt-4 flex flex-col sm:flex-row gap-3 justify-between">
+          <div className="mt-4 flex flex-col-reverse sm:flex-row gap-3 sm:items-end justify-between">
             {message.actions.canBeTranslated && langIsAvailable && (
               <div className="space-y-2">
                 <div className="flex justify-center gap-2 items-center">
@@ -122,7 +122,7 @@ const Message = ({ message }) => {
                     onValueChange={setTargetLanguage}
                     disabled={isProcessing}
                   >
-                    <SelectTrigger className="border-0 hover:bg-slate-500 h-7 shadow-none p-1 w-[100px]">
+                    <SelectTrigger className="border-0 hover:bg-[#FAEBD7] dark:hover:bg-[#FCAF58] h-7 shadow-none p-1 w-[100px]">
                       <SelectValue placeholder="Translate to" />
                     </SelectTrigger>
                     <SelectContent>
@@ -170,7 +170,7 @@ const Message = ({ message }) => {
 
     case "result":
       return (
-        <div className="bg-green-50 p-4 space-y-4 max-w-[70%] rounded-lg shadow">
+        <div className="bg-green-50 dark:bg-[#619B8A] p-4 space-y-4 max-w-[70%] rounded-lg shadow">
           {message.summary && (
             <div>
               <div className="text-sm text-gray-500 mb-1">Summary:</div>
@@ -179,7 +179,7 @@ const Message = ({ message }) => {
           )}
           {message.translatedText && (
             <div>
-              <div className="text-sm text-gray-500 mb-1">
+              <div className="text-sm text-gray-500  dark:text-black/70 mb-1">
                 Translation from {AVAILABLE_LANGUAGES[message.sourceLanguage]}{" "}
                 to {AVAILABLE_LANGUAGES[message.targetLanguage]}:
               </div>
@@ -197,7 +197,7 @@ const Message = ({ message }) => {
       );
     case "loading":
       return (
-        <div className="flex items-center gap-2 text-gray-500 p-4 bg-gray-50 rounded-lg shadow">
+        <div className="flex items-center gap-2 text-gray-500 dark:text-gray-200 p-4 bg-gray-50 dark:bg-[#393838] rounded-lg shadow">
           <Loader2 className="w-4 h-4 animate-spin" />
           {message.text}
         </div>

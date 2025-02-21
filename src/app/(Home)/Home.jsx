@@ -29,7 +29,7 @@ const HomePage = () => {
   return (
     <SidebarProvider defaultOpen={false}>
       <SideBar />
-      <SidebarInset className="bg-[url('/assets/noise.png')] flex flex-col h-full min-h-screen">
+      <SidebarInset className="bg-[url('/assets/noise.png')] bg-[#FAEBD7] dark:bg-[#292a2d] flex flex-col h-full min-h-screen">
         <Header />
         <div className="flex flex-col flex-1 max-w-3xl w-full mx-auto rounded-xl">
           {hasMessages ? (

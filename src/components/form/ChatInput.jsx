@@ -20,6 +20,7 @@ import {
 } from "../ui/select";
 import { ArrowRightLeft, ArrowUpFromDot, Globe, Languages } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const ChatInput = () => {
   const [text, setText] = useState("");
@@ -27,6 +28,7 @@ const ChatInput = () => {
   const [targetLanguage, setTargetLanguage] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const { addMessage, createChat, currentChatId, removeMessage } = useStore();
+  const isMobile = useIsMobile();
 
   const showSummarizeOption = text.length > 150;
 
@@ -163,7 +165,7 @@ const ChatInput = () => {
     <div>
       <form
         onSubmit={handleSubmit}
-        className="p-3 bg-[#f3f4f6] cursor-text rounded-3xl shadow-[0px_0px_0px_0.5px_#dce0e9]"
+        className="p-3 bg-[#f3f4f6] dark:bg-[#404045] cursor-text rounded-3xl shadow-[0px_0px_0px_0.5px_#dce0e9] dark:shadow-[0px_0px_0px_0.5px_##c0c0c04d]"
       >
         <div className="flex">
           <Textarea
@@ -177,7 +179,7 @@ const ChatInput = () => {
             <span>
               <Button
                 type="submit"
-                className="rounded-full p-0 h-9 min-w-9"
+                className="rounded-full bg-[#FA9F42] hover:bg-[#FA9F42]/80 dark:bg-[#FCAF58] dark:hover:bg-[#FCAF58]/80 p-0 h-9 min-w-9"
                 disabled={!text.trim() || isProcessing}
               >
                 <ArrowUpFromDot />
@@ -187,22 +189,27 @@ const ChatInput = () => {
         </div>
 
         <div className="flex gap-4 mt-1 justify-between items-center">
-          <div className="flex gap-6">
+          <div className="flex gap-4 sm:gap-6">
             <div className="flex justify-center gap-2 items-center">
               <div className="flex justify-center gap-2 items-center">
                 <div className="text-sm flex justify-center items-center">
                   <Languages className="w-4 h-4" />
-                  <span className="text-base font-bold">Sage</span> translate
+                  {!isMobile && (
+                    <small>
+                      <span className="text-base font-bold">Sage</span>{" "}
+                      translate{" "}
+                    </small>
+                  )}
                 </div>
 
-                <ArrowRightLeft className="h-4 w-4" />
+                {!isMobile && <ArrowRightLeft className="h-4 w-4" />}
               </div>
               <Select
                 value={targetLanguage}
                 onValueChange={setTargetLanguage}
                 disabled={isProcessing}
               >
-                <SelectTrigger className="border-0 hover:bg-slate-500 h-7 shadow-none p-1 w-[100px]">
+                <SelectTrigger className="border-0 hover:bg-[#FAEBD7] dark:hover:bg-[#FCAF58] h-7 shadow-none p-1 w-[100px]">
                   <SelectValue placeholder="Translate to" />
                 </SelectTrigger>
                 <SelectContent>
@@ -232,7 +239,7 @@ const ChatInput = () => {
                     flex items-center gap-1 px-3 py-1 rounded-full text-sm hover:bg-[#E0E4ED] transition-colors border text-[#4c4c4c] border-black/10 bg-white
                     ${
                       shouldSummarize &&
-                      "bg-[#dbeafe] border-[#007aff26] text-[#4d6bfe] hover:bg-[#c3daf8]"
+                      "bg-[#DBEAFE] border-[#007aff26] text-[#4d6bfe] hover:bg-[#c3daf8]"
                     }
                    
                   `}
@@ -245,8 +252,10 @@ const ChatInput = () => {
           </div>
 
           {text.trim() && (
-            <div className=" text-gray-400">
-              {text.trim().length} characters
+            <div className=" text-sm text-gray-400">
+              {`${text.trim().length} character${
+                text.trim().length > 1 ? "s" : ""
+              }`}
             </div>
           )}
         </div>

@@ -14,20 +14,20 @@ const ThemeToggle = () => {
 
   if (!hasMounted) {
     return (
-      <span className="animate-pulse min-w-[28px] min-h-[28px] p-2 rounded-full dark:bg-zinc-800 bg-zinc-200 border dark:border-zinc-700 border-zinc-300"></span>
+      <span className="animate-pulse min-w-[28px] min-h-[28px] dark:bg-[#FAEBD7] dark:text-black text-white bg-[#292a2d] border dark:border-[#FAEBD7] border-[#292a2d] rounded-full p-2"></span>
     );
   }
 
   return (
     <button
       onClick={toggleTheme}
-      className={`dark:bg-primary-bg bg-zinc-100 dark:text-primary-color text-zinc-500 border dark:border-zinc-800 border-zinc-200 rounded-full p-2 `}
+      className={`dark:bg-[#FAEBD7] dark:text-black text-white bg-[#292a2d] border dark:border-[#FAEBD7] border-[#292a2d] rounded-full p-2`}
       aria-label="Toggle Theme"
     >
       {currentTheme === "light" ? (
-        <Sun className="w-5 h-5" />
-      ) : (
         <Moon className="w-5 h-5" />
+      ) : (
+        <Sun className="w-5 h-5" />
       )}
     </button>
   );
