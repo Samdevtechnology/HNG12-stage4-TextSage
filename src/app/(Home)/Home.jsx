@@ -53,7 +53,12 @@ const HomePage = () => {
                 isMobile && "justify-end"
               )}
             >
-              <div className="text-center mb-6">
+              <div
+                className={cn(
+                  `text-center mb-6`,
+                  isMobile && "m-auto space-y-2"
+                )}
+              >
                 <h1 className="text-2xl flex justify-center items-center font-bold text-gray-800 dark:text-gray-100">
                   Hi, I'm&nbsp;
                   <div className="logo text-2xl font-bold">
