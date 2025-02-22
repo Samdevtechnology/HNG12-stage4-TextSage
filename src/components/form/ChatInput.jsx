@@ -99,6 +99,8 @@ const ChatInput = () => {
       text,
     });
 
+    setText("");
+
     // Add loading message
     const loadingMessageId = crypto.randomUUID();
     addMessage({
