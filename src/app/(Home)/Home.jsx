@@ -11,7 +11,8 @@ import Warning from "@/components/dialog/Warning";
 
 const HomePage = () => {
   const currentChat = useStore((state) => state.getCurrentChat());
-  const hasMessages = !currentChat || currentChat.messages.length > 0;
+  const hasMessages =
+    currentChat && currentChat.messages && currentChat.messages.length > 0;
   const isMobile = useIsMobile();
   const [mounted, setMounted] = useState(false);
 
@@ -52,6 +53,22 @@ const HomePage = () => {
                 isMobile && "justify-end"
               )}
             >
+              <div className="text-center mb-6">
+                <h1 className="text-2xl flex justify-center items-center font-bold text-gray-800 dark:text-gray-100">
+                  Hi, I'm&nbsp;
+                  <div className="logo text-2xl font-bold">
+                    <span className="text-[#907AD6] dark:text-[#DABFFF]">
+                      Text
+                    </span>
+                    <span className="text-[#FA9F42] dark:text-[#FCAF58]">
+                      Sage
+                    </span>
+                  </div>
+                </h1>
+                <p className="text-gray-700 dark:text-gray-400">
+                  Detect text language, translate, and summarize.
+                </p>
+              </div>
               <div className="w-full max-w-2xl">
                 <ChatInput />
               </div>
