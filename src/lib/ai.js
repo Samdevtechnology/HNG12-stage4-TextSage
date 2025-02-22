@@ -15,7 +15,7 @@ export const AVAILABLE_LANGUAGES = {
 };
 
 const options = {
-  sharedContext: "This is a scientific article",
+  sharedContext: "This is an article",
   type: "tl;dr",
   format: "markdown",
   length: "medium",
@@ -29,7 +29,7 @@ export const detectLanguage = async (text) => {
     if (canDetect === "no") {
       // The language detector isn't usable.
       throw new Error(
-        `Your browser supports the Experimental Language Detector API, but for some reason it can't be used at the moment (i.e insufficient disk space).`
+        `Your browser supports the Experimental Language Detector API, but it needs to download the model first. Download size might be too large so i won't attempt to help download it. Sage is considerate😊.`
       );
     }
     let detector;
@@ -37,7 +37,7 @@ export const detectLanguage = async (text) => {
       detector = await self.ai.languageDetector.create();
     } else {
       throw new Error(
-        `Your browser supports the Experimental Language Detector API, but it needs to download the model first. Download size might be too large so i won't attempt to help download it.`
+        `Your browser supports the Experimental Language Detector API, but for some reason it can't be used at the moment (i.e insufficient disk space).`
       );
     }
     const result = await detector.detect(text);
@@ -62,7 +62,7 @@ export const translateText = async (text, srcLang, targetLang) => {
     if (canDetect === "no") {
       // The translator translate isn't usable.
       throw new Error(
-        `Your browser supports the Experimental Translator API, but for some reason it can't be used at the moment (i.e insufficient disk space).`
+        `Your browser supports the Experimental Translator API, but it needs to download the model first. Download size might be too large so i won't attempt to help download it. Download it or try another language pair . Sage is considerate😊.`
       );
     }
 
@@ -75,7 +75,7 @@ export const translateText = async (text, srcLang, targetLang) => {
       });
     } else {
       throw new Error(
-        `Your browser supports the Experimental Translator API, but it needs to download the model first. Download size might be too large so i won't attempt to help download it.`
+        `Your browser supports the Experimental Translator API, but for some reason it can't be used at the moment (i.e insufficient disk space).`
       );
     }
 
@@ -99,7 +99,7 @@ export const summarizeText = async (text) => {
     if (canDetect === "no") {
       // The summarizer isn't usable.
       throw new Error(
-        `Your browser supports the Experimental Summarizer API, but for some reason it can't be used at the moment (i.e insufficient disk space).`
+        `Your browser supports the Experimental Summarizer API, but it needs to download the model first. Download size might be too large so i won't attempt to help download it. Sage is considerate😊.`
       );
     }
     let summarizer;
@@ -108,7 +108,7 @@ export const summarizeText = async (text) => {
       summarizer = await self.ai.summarizer.create(options);
     } else {
       throw new Error(
-        `Your browser supports the Experimental Summarizer API, but it needs to download the model first. Download size might be too large so i won't attempt to help download it.`
+        `Your browser supports the Experimental Summarizer API, but for some reason it can't be used at the moment (i.e insufficient disk space).`
       );
     }
 
