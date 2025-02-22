@@ -16,7 +16,9 @@ const Warning = () => {
     <AlertDialog open={!hasSeenWarning} onOpenChange={setHasSeenWarning}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>⚠️ Experimental AI Notice</AlertDialogTitle>
+          <AlertDialogTitle className="text-center mb-2">
+            ⚠️ Experimental AI Notice
+          </AlertDialogTitle>
           <div className="space-y-2">
             <AlertDialogDescription className="text-base text-inherit font-normal">
               Welcome to{" "}
@@ -38,7 +40,7 @@ const Warning = () => {
                   limited functionality)
                 </li>
               </ul>
-              <div className="mt-2 text-center">
+              <div className="mt-4 text-center">
                 <p>🎉 Enjoy the Experience!</p>
               </div>
             </div>
