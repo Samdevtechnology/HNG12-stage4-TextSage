@@ -99,14 +99,16 @@ ticket-booking-app/
 |   └── app/                 # Next.js app router
 │        ├── page.jsx        # Homepage
 │        ├── favicon.ico     # Favicon
-│        ├── (home)/         # Homepage Logic with available tickets
-│        │   └── page.jsx
+│        ├── (home)/         # Homepage Logic
+│        └── page.jsx
 |
 │
 ├── components/
 │   ├── common/              # Reusable components (e.g., Container.jsx,)
-│   ├── forms/               # Forms
+│   ├── form/                # Forms
 |   |   └── ChatInput/
+│   ├── dialog/              # Dialogs
+|   |   └── Warning/
 │   └── ui/                  # Shadcn components
 |
 ├── store/

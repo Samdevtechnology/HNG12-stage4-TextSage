@@ -7,6 +7,7 @@ import { useStore } from "@/store/chat";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import Warning from "@/components/dialog/Warning";
 
 const HomePage = () => {
   const currentChat = useStore((state) => state.getCurrentChat());
@@ -28,6 +29,7 @@ const HomePage = () => {
 
   return (
     <SidebarProvider defaultOpen={false}>
+      <Warning />
       <SideBar />
       <SidebarInset className="bg-[url('/assets/noise.png')] bg-[#FAEBD7] dark:bg-[#292a2d] flex flex-col h-full min-h-screen">
         <Header />
