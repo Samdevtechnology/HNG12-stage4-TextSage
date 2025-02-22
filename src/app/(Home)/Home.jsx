@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import Warning from "@/components/dialog/Warning";
+import ThemeToggle from "@/components/common/ThemeToggle";
+import HeaderMini from "@/components/common/HeaderMini";
 
 const HomePage = () => {
   const currentChat = useStore((state) => state.getCurrentChat());
@@ -33,7 +35,7 @@ const HomePage = () => {
       <Warning />
       <SideBar />
       <SidebarInset className="bg-[url('/assets/noise.png')] bg-[#FAEBD7] dark:bg-[#292a2d] flex flex-col h-full min-h-screen">
-        <Header />
+        {hasMessages ? <Header /> : <HeaderMini />}
         <div className="flex flex-col flex-1 max-w-3xl w-full mx-auto rounded-xl">
           {hasMessages ? (
             // Layout when there are messages
@@ -61,17 +63,22 @@ const HomePage = () => {
               >
                 <h1 className="text-2xl flex justify-center items-center font-bold text-gray-800 dark:text-gray-100">
                   Hi, I'm&nbsp;
-                  <div className="logo text-2xl font-bold">
-                    <span className="text-[#907AD6] dark:text-[#DABFFF]">
-                      Text
-                    </span>
-                    <span className="text-[#FA9F42] dark:text-[#FCAF58]">
-                      Sage
-                    </span>
+                  <div className="flex items-center gap-1">
+                    <div className="logo text-2xl font-bold">
+                      <span className="text-[#907AD6] dark:text-[#DABFFF]">
+                        Text
+                      </span>
+                      <span className="text-[#FA9F42] dark:text-[#FCAF58]">
+                        Sage
+                      </span>
+                    </div>
+                    <div>
+                      <ThemeToggle small />
+                    </div>
                   </div>
                 </h1>
                 <p className="text-gray-700 dark:text-gray-400">
-                  Detect text language, translate, and summarize.
+                  I detect text language, translate, and summarize.
                 </p>
               </div>
               <div className="w-full max-w-2xl">
